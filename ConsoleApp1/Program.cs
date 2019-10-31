@@ -40,6 +40,11 @@ namespace Heap
 
             heap.Display();
 
+            disp = heap.Remove();
+            Console.WriteLine($"Removed:{disp}");
+
+            heap.Display();
+
         }
     }
 }

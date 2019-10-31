@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
 
 namespace Heap
 {
@@ -9,7 +6,7 @@ namespace Heap
     {
         private const int MaxHeap = 100;
         private readonly int[] _nodes = new int[MaxHeap];
-        private int _lastNode = 1;
+        private int _lastNode = 0;
 
         public void Insert(int item)
         {
@@ -26,7 +23,7 @@ namespace Heap
 
         private void Swap(ref int x, ref int y)
         {
-            int temp = x;
+            var temp = x;
             x = y;
             y = temp;
         }
@@ -35,10 +32,10 @@ namespace Heap
 
         public int Remove()
         {
-            if (_lastNode >= 0)
+            if (_lastNode > 0)
             {
-                int result = _nodes[1];
-                _nodes[1] = _nodes[_lastNode-1];
+                int result = _nodes[0];
+                _nodes[0] = _nodes[_lastNode-1];
                 _lastNode--;
                 HeapifyDown();
                 return result;
@@ -49,7 +46,7 @@ namespace Heap
 
         public void Display()
         {
-            for(var i=1;i < _lastNode;i++)
+            for(var i=0;i < _lastNode;i++)
             {
                 Console.Write($" {_nodes[i]} ");
             }
@@ -59,13 +56,13 @@ namespace Heap
 
         private void HeapifyDown()
         {
-            int parentIndex = 1;
+            int parentIndex = 0;
             int leftChildIndex = parentIndex * 2;
             int rightChildIndex = parentIndex * 2 + 1;
             while (parentIndex < _lastNode && leftChildIndex < _lastNode)
             {
                 int maxIndex = leftChildIndex;
-                if (rightChildIndex < _lastNode)
+                if (rightChildIndex <= _lastNode)
                 {
                     maxIndex = _nodes[leftChildIndex] < _nodes[rightChildIndex] ? leftChildIndex : rightChildIndex;
                 }
